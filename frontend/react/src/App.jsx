@@ -1,10 +1,12 @@
 import { Routes, Route, Link, Outlet } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import GameListPage from './pages/GameListPage';
+import GameDetailPage from './pages/GameDetailPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PartyListPage from './pages/PartyListPage';
 import PartyCreatePage from './pages/PartyCreatePage';
+import PartyDetailPage from './pages/PartyDetailPage';
 import { useAuth } from './context/AuthContext';
 
 const Layout = () => {
@@ -50,8 +52,10 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="games" element={<GameListPage />} />
+        <Route path="games/:id" element={<GameDetailPage />} />
         <Route path="parties" element={<PartyListPage />} />
         <Route path="parties/create" element={<PartyCreatePage />} />
+        <Route path="parties/:id" element={<PartyDetailPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
       </Route>

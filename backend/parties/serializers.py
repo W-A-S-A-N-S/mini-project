@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .models import Party, PartyMember, PartyComment
 from games.serializers import GameListSerializer
 from users.serializers import UserSerializer
+from games.utils import get_or_create_game_from_steam
 
 User = get_user_model()
 
@@ -71,16 +72,34 @@ class PartyDetailSerializer(serializers.ModelSerializer):
 
 class PartyCreateSerializer(serializers.ModelSerializer):
     """파티 생성 직렬화"""
+    steam_app_id = serializers.CharField(write_only=True, required=False)
+
     class Meta:
         model = Party
-        fields = ('title', 'description', 'game', 'max_members', 
-                 'play_time', 'duration_hours', 'required_skill', 
+        fields = ('title', 'description', 'game', 'steam_app_id', 'max_members',
+                 'play_time', 'duration_hours', 'required_skill',
                  'play_style', 'voice_chat_required', 'discord_link')
-    
+        extra_kwargs = {'game': {'required': False}}
+
+    def validate(self, data):
+        if not data.get('game') and not data.get('steam_app_id'):
+            raise serializers.ValidationError("Either 'game' or 'steam_app_id' is required.")
+        if data.get('game') and data.get('steam_app_id'):
+            raise serializers.ValidationError("Provide either 'game' or 'steam_app_id', not both.")
+        return data
+
     def create(self, validated_data):
         user = self.context['request'].user
+        steam_app_id = validated_data.pop('steam_app_id', None)
+        game = validated_data.get('game')
+
+        if steam_app_id:
+            game = get_or_create_game_from_steam(steam_app_id)
+            if not game:
+                raise serializers.ValidationError("Could not find or create a game with the provided Steam App ID.")
+            validated_data['game'] = game
+
         party = Party.objects.create(creator=user, **validated_data)
-        # 생성자를 자동으로 파티 멤버로 추가
         PartyMember.objects.create(party=party, user=user)
         return party
 

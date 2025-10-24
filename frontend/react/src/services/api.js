@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
@@ -55,4 +55,8 @@ export const joinParty = (partyId) => {
 
 export const leaveParty = (partyId) => {
   return apiClient.post(`/parties/${partyId}/leave/`);
+};
+
+export const deleteParty = (partyId) => {
+  return apiClient.delete(`/parties/${partyId}/`);
 };

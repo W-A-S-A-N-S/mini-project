@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createParty, fetchGames } from '../services/api';
+import { createParty } from '../services/api';
+import AsyncSelect from 'react-select/async';
+import axios from 'axios';
 
 const PartyCreatePage = () => {
-  const [games, setGames] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    game: '',
+    game: null, // Will store the selected game object
+    steam_app_id: '',
     max_members: 4,
     play_time: '',
     duration_hours: 2,
@@ -19,20 +21,54 @@ const PartyCreatePage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getGames = async () => {
-      try {
-        const response = await fetchGames();
-        setGames(response.data.results);
-        if (response.data.results.length > 0) {
-          setFormData(prev => ({ ...prev, game: response.data.results[0].id }));
-        }
-      } catch (err) {
-        console.error("Failed to fetch games", err);
-      }
-    };
-    getGames();
-  }, []);
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: '#1F2937', // gray-800
+      borderColor: '#4B5563', // gray-600
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: '#1F2937', // gray-800
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? '#374151' : '#1F2937', // gray-700 on focus, gray-800 otherwise
+      color: 'white',
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: 'white',
+    }),
+    input: (provided) => ({
+      ...provided,
+      color: 'white',
+    }),
+  };
+
+  const loadOptions = async (inputValue) => {
+    if (!inputValue) {
+      return [];
+    }
+    try {
+      const response = await axios.get(`http://localhost:8000/api/games/search/?q=${inputValue}`);
+      return response.data.map(game => ({
+        value: game.appid,
+        label: game.name,
+      }));
+    } catch (err) {
+      console.error("Failed to fetch games", err);
+      return [];
+    }
+  };
+
+  const handleGameChange = (selectedOption) => {
+    setFormData(prev => ({
+      ...prev,
+      game: selectedOption,
+      steam_app_id: selectedOption ? selectedOption.value : '',
+    }));
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -42,8 +78,16 @@ const PartyCreatePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+
+    const partyData = { ...formData };
+    if (partyData.game && partyData.game.value) {
+        partyData.steam_app_id = partyData.game.value;
+    }
+    delete partyData.game;
+
+
     try {
-      await createParty(formData);
+      await createParty(partyData);
       navigate('/parties');
     } catch (err) {
       setError(err.response?.data || { general: 'Failed to create party.' });
@@ -58,9 +102,15 @@ const PartyCreatePage = () => {
         
         <div>
           <label className="block text-gray-300 mb-2">Game</label>
-          <select name="game" value={formData.game} onChange={handleChange} className="w-full p-2 bg-gray-700 rounded">
-            {games.map(game => <option key={game.id} value={game.id}>{game.name}</option>)}
-          </select>
+          <AsyncSelect
+            cacheOptions
+            loadOptions={loadOptions}
+            defaultOptions
+            onChange={handleGameChange}
+            value={formData.game}
+            placeholder="Search for a game on Steam..."
+            styles={customStyles}
+          />
         </div>
 
         <div>

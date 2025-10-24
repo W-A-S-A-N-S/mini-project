@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PartyCard = ({ party, onJoin }) => {
   const statusColors = {
@@ -9,7 +10,7 @@ const PartyCard = ({ party, onJoin }) => {
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+    <Link to={`/parties/${party.id}`} className="block bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:bg-gray-700 transition-colors duration-200">
       <div className="p-4">
         <div className="flex justify-between items-start">
           <div>
@@ -31,7 +32,7 @@ const PartyCard = ({ party, onJoin }) => {
             <span className="text-sm font-bold text-white">{party.current_members_count} / {party.max_members} Members</span>
           </div>
           <button 
-            onClick={() => onJoin(party.id)}
+            onClick={(e) => { e.preventDefault(); onJoin(party.id); }}
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded-lg text-sm disabled:bg-gray-500"
             disabled={party.is_full || party.status !== 'open'}
           >
@@ -39,7 +40,7 @@ const PartyCard = ({ party, onJoin }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
