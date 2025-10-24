@@ -1,0 +1,172 @@
+[
+  {
+    "model": "games.game",
+    "pk": 1,
+    "fields": {
+      "name": "Left 4 Dead 2",
+      "steam_app_id": "550",
+      "description": "4명의 생존자가 되어 좀비 무리를 헤치고 탈출하는 협동 FPS 게임",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/550/header.jpg",
+      "genre": "fps",
+      "max_players": 4,
+      "min_players": 1,
+      "difficulty": "normal",
+      "is_popular": true,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 2,
+    "fields": {
+      "name": "Portal 2",
+      "steam_app_id": "620",
+      "description": "포탈건을 이용한 창의적인 퍼즐을 풀어나가는 협동 퍼즐 게임",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/620/header.jpg",
+      "genre": "puzzle",
+      "max_players": 2,
+      "min_players": 2,
+      "difficulty": "normal",
+      "is_popular": true,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 3,
+    "fields": {
+      "name": "Deep Rock Galactic",
+      "steam_app_id": "548430",
+      "description": "우주 드워프가 되어 동굴을 탐험하고 자원을 채굴하는 협동 FPS",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/548430/header.jpg",
+      "genre": "fps",
+      "max_players": 4,
+      "min_players": 1,
+      "difficulty": "hard",
+      "is_popular": true,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 4,
+    "fields": {
+      "name": "Phasmophobia",
+      "steam_app_id": "739630",
+      "description": "유령 사냥꾼이 되어 귀신의 정체를 밝혀내는 협동 호러 게임",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/739630/header.jpg",
+      "genre": "other",
+      "max_players": 4,
+      "min_players": 1,
+      "difficulty": "hard",
+      "is_popular": true,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 5,
+    "fields": {
+      "name": "It Takes Two",
+      "steam_app_id": "1426210",
+      "description": "두 명이 함께 플레이해야만 진행 가능한 협동 어드벤처 게임",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/1426210/header.jpg",
+      "genre": "adventure",
+      "max_players": 2,
+      "min_players": 2,
+      "difficulty": "easy",
+      "is_popular": true,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 6,
+    "fields": {
+      "name": "Valheim",
+      "steam_app_id": "892970",
+      "description": "바이킹이 되어 발할라를 탐험하는 오픈월드 생존 게임",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/892970/header.jpg",
+      "genre": "survival",
+      "max_players": 10,
+      "min_players": 1,
+      "difficulty": "normal",
+      "is_popular": true,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 7,
+    "fields": {
+      "name": "Overcooked! 2",
+      "steam_app_id": "728880",
+      "description": "요리사가 되어 주문을 처리하는 정신없는 협동 요리 게임",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/728880/header.jpg",
+      "genre": "simulation",
+      "max_players": 4,
+      "min_players": 1,
+      "difficulty": "easy",
+      "is_popular": false,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 8,
+    "fields": {
+      "name": "GTFO",
+      "steam_app_id": "493520",
+      "description": "극한의 난이도를 자랑하는 4인 협동 호러 FPS",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/493520/header.jpg",
+      "genre": "fps",
+      "max_players": 4,
+      "min_players": 4,
+      "difficulty": "extreme",
+      "is_popular": false,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 9,
+    "fields": {
+      "name": "Raft",
+      "steam_app_id": "648800",
+      "description": "뗏목을 타고 바다를 떠도는 생존 게임",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/648800/header.jpg",
+      "genre": "survival",
+      "max_players": 8,
+      "min_players": 1,
+      "difficulty": "normal",
+      "is_popular": false,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "games.game",
+    "pk": 10,
+    "fields": {
+      "name": "Sea of Thieves",
+      "steam_app_id": "1172620",
+      "description": "해적이 되어 보물을 찾아 떠나는 오픈월드 어드벤처",
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/1172620/header.jpg",
+      "genre": "adventure",
+      "max_players": 4,
+      "min_players": 1,
+      "difficulty": "normal",
+      "is_popular": true,
+      "created_at": "2024-01-01T00:00:00Z", 
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  }
+]
